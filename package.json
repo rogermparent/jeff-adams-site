@@ -1,9 +1,9 @@
 {
-  "name": "victor-hugo",
-  "version": "1.0.0",
-  "description": "Victor Hugo is a Hugo boilerplate for creating truly epic websites!",
-  "repository": "netlify/victor-hugo",
-  "main": "index.js",
+  "name": "jeff-adams-site",
+  "version": "2.0.0",
+  "description": "A website for a local political candidate based off the Victor Hugo template.",
+  "repository": "rogermparent/jeff-adams-site",
+  "main": "gulpfile.babel.js",
   "scripts": {
     "hugo": "gulp hugo",
     "build": "gulp build",
