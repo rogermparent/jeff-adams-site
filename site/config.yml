@@ -1,0 +1,4 @@
+baseURL: "http://jeff-for-selectman.netlify.com"
+languageCode: "en-us"
+disableKinds: ["RSS", "taxonomy", "taxonomyTerm"]    # For an easy start, see more at: https://gohugo.io/content-management/taxonomies/#hugo-taxonomy-defaults
+enableRobotsTXT: true    # The dynamic creation of robots.txt for prevention of indexing by search engines in the development and preview modes.

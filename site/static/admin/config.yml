@@ -1,0 +1,87 @@
+backend:
+  name: git-gateway
+  branch: master
+
+media_folder: "site/static/images/uploads"
+public_folder: "/images/uploads"
+
+publish_mode: editorial_workflow
+
+collections:
+  - name: "config"
+    label: "Configuration"
+    files:
+      - label: "Site config"
+        name: "site"
+        file: "site/data/site.yml"
+        description: >-
+          Configuration used across the entire website.
+        fields:
+          - label: Title
+            description: >-
+              The text shown on the browser tab and the top of the window.
+            name: title
+            widget: string
+          - label: Navigation menu
+            description: >-
+              The list of links shown at the top of the site.
+            label_singular: entries
+            name: nav
+            widget: list
+            fields:
+              - label: Label
+                name: label
+                widget: string
+              - label: URL
+                name: url
+                widget: string
+  
+  - name: pages
+    label: Pages
+    label_singular: Page
+    folder: "site/content"
+    filter: { field: layout, value: single }
+    create: true
+    fields:
+      - label: Title
+        name: title
+        description: >-
+          The text shown on the browser tab and the top of the window.
+        widget: string
+      - label: Image
+        name: image
+        widget: image
+        required: false
+      - label: Body
+        name: body
+        widget: markdown
+      - label: Layout
+        name: layout
+        default: single
+        widget: hidden
+  
+  - name: "special-pages"
+    label: "Special Pages"
+    files:
+      - label: "Home Page"
+        name: "home"
+        file: "site/content/_index.md"
+        fields:
+          - label: Title
+            name: title
+            description: >-
+              Shown on the browser tab and the top of the window.
+            widget: string
+          - label: Banner
+            name: banner
+            widget: object
+            fields:
+              - label: Heading
+                name: heading
+                widget: string
+              - label: Image
+                name: image
+                widget: image
+              - label: Content
+                name: content
+                widget: text
