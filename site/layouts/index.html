@@ -1,9 +1,18 @@
 {{ define "main" }}
-
-<h1>Hugo with Gulp, PostCSS and Webpack</h1>
-
-<p>
-  Hooray 🎉 - you've built this with <a href="https://github.com/netlify/victor-hugo">Victor-Hugo</a>!
-</p>
-
-{{end}}
+<section class="banner"
+	 {{ if .Params.banner.image }}
+	 style="background-image: url('{{ .Params.banner.image }}')"
+	 {{end}}>
+  <div class="inner">
+    <header class="with-underline">
+      <h1>
+        {{ .Params.banner.heading }}
+      </h1>
+    </header>
+    <div class="content">
+      {{ .Params.banner.content }}
+    </div>
+    <a href="/about" class="button">Learn more</a>
+  </div>
+</section>
+{{ end }}

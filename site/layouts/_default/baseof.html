@@ -1,21 +1,38 @@
 <!doctype html>
-<html lang="{{ $.Site.Language.Lang }}">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <base href="{{ if getenv "CONTEXT" }}{{ cond (eq "production" (getenv "CONTEXT")) (getenv "URL") (getenv "DEPLOY_PRIME_URL") }}{{ else }}{{ $.Site.BaseURL }}{{ end }}">
-    <title>{{ $.Site.Title }}</title>
-    <link rel="stylesheet" href="css/main.css"/>
-  </head>
-  <body>
-
-    {{ block "header" . }}{{ partial "header" . }}{{end}}
-
-    {{ block "main" . }}{{end}}
-
-    {{ block "footer" . }}{{ partial "footer" . }}{{end}}
-
-    <script src="app.js"></script>
-
-  </body>
+<html class="no-js" lang="{{ .Site.LanguageCode | default "en" }}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{{ block "title" . }}{{ with .Title }}{{ . }} - {{ end }}{{ .Site.Data.site.title }}{{ end }}</title>
+        <meta name="description" content="{{ .Description }}">
+        {{- if eq (getenv "HUGO_ENV") "production" | or (eq .Site.Params.env "production") -}}
+        <meta name="robots" content="index, follow">
+        {{- else -}}
+        <meta name="robots" content="noindex, nofollow">
+        {{- end -}}
+        <link rel="shortcut icon" href="favicon.ico">
+        {{- block "head-includes" . -}}
+        {{- partial "head-includes.html" . -}}
+        {{- end -}}
+    </head>
+    <body>
+        {{- "<!--[if lte IE 9]>" | safeHTML -}}
+                 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+                 {{- "<![endif]-->" | safeHTML -}}
+        {{- block "header" . -}}
+        {{- partial "header.html" . -}}
+        {{- end -}}
+        <main>
+            {{- block "main" . -}}
+            {{ .Content }}
+            {{- end -}}
+        </main>
+        {{- block "footer" . -}}
+        {{- partial "footer.html" . -}}
+        {{- end -}}
+        {{- block "scripts" . -}}
+        {{- partial "scripts.html" . -}}
+        {{- end -}}
+    </body>
 </html>

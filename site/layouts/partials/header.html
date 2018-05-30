@@ -1,0 +1,13 @@
+<header>
+    <a class="logo" href="/index.html">
+        <div><strong>Jeff for Selectman</strong></div>
+        <div>of Lebanon, Maine</div>
+    </a>
+    {{ if (isset $.Site.Data.site "nav") and (gt (len $.Site.Data.site.nav) 0) }}
+    <nav>
+        {{ range $.Site.Data.site.nav }}
+        <a href="{{.url}}">{{.label}}</a>
+        {{ end }}
+    </nav>
+    {{ end }}
+</header>
