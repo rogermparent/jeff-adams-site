@@ -3,8 +3,8 @@ nav:
   - label: Home
     url: /
   - label: About
-    url: /about
+    url: /about/
   - label: Photos
-    url: /photos
+    url: /photos/
   - label: Events
-    url: /events
+    url: /events/
