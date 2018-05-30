@@ -2,7 +2,7 @@ backend:
   name: git-gateway
   branch: master
 
-media_folder: "site/static/images/uploads"
+media_folder: "src/images/uploads"
 public_folder: "/images/uploads"
 
 publish_mode: editorial_workflow
@@ -85,3 +85,27 @@ collections:
               - label: Content
                 name: content
                 widget: text
+      - label: "Gallery"
+        name: "gallery"
+        file: "site/content/photos.md"
+        fields:
+          - label: Title
+            name: title
+            widget: string
+          - label: Layout
+            name: layout
+            widget: hidden
+            default: "gallery"
+          - label: Pictures
+            name: gallery
+            widget: list
+            fields:
+              - label: Image
+                name: image
+                widget: image
+              - label: Description
+                name: description
+                widget: string
+          - label: Body
+            name: body
+            widget: markdown

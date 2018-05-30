@@ -10,7 +10,11 @@ import cssExtend from "postcss-extend";
 import cssNested from "postcss-nested";
 import BrowserSync from "browser-sync";
 import webpack from "webpack";
+import imageResize from "gulp-image-resize";
+import gulpNewer from "gulp-newer";
+import frontmatter from "gray-matter";
 import webpackConfig from "./webpack.conf";
+import fs from "fs";
 
 const browserSync = BrowserSync.create();
 
@@ -18,17 +22,19 @@ const browserSync = BrowserSync.create();
 const hugoArgsDefault = ["-d", "../dist", "-s", "site", "-v"];
 const hugoArgsPreview = ["--buildDrafts", "--buildFuture"];
 
+gulp.task("assets", ["css", "js", "fonts", "images"]);
+
 // Development tasks
 gulp.task("hugo", (cb) => buildSite(cb));
 gulp.task("hugo-preview", (cb) => buildSite(cb, hugoArgsPreview));
 
 // Run server tasks
-gulp.task("server", ["hugo", "css", "js", "fonts"], (cb) => runServer(cb));
-gulp.task("server-preview", ["hugo-preview", "css", "js", "fonts"], (cb) => runServer(cb));
+gulp.task("server", ["hugo", "assets"], (cb) => runServer(cb));
+gulp.task("server-preview", ["hugo-preview", "assets"], (cb) => runServer(cb));
 
 // Build/production tasks
-gulp.task("build", ["css", "js", "fonts"], (cb) => buildSite(cb, [], "production"));
-gulp.task("build-preview", ["css", "js", "fonts"], (cb) => buildSite(cb, hugoArgsPreview, "production"));
+gulp.task("build", ["assets"], (cb) => buildSite(cb, [], "production"));
+gulp.task("build-preview", ["assets"], (cb) => buildSite(cb, hugoArgsPreview, "production"));
 
 // Compile CSS with PostCSS
 gulp.task("css", () => (
@@ -67,6 +73,47 @@ gulp.task('fonts', () => (
         .pipe(browserSync.stream())
 ));
 
+// Clean images
+
+// Optimize images
+const imagePath = "./dist/images";
+gulp.task('images:optimize', () => (
+    gulp.src("./src/images/**/*", {nodir: true })
+	.pipe(gulpNewer(imagePath))
+	.pipe(gulp.dest(imagePath))
+));
+
+// Generate image thumbnails
+const thumbPath = './dist/images/thumbnails';
+const galleryPage = './site/content/photos.md';
+gulp.task('images:thumbnails', () => {
+    
+    const galleryFiles = frontmatter(
+        fs.readFileSync('./site/content/photos.md')
+    ).data.gallery.map((item) => {
+        return('./src' + item.image);
+    });
+
+    console.log(galleryFiles);
+
+    gulp.src(galleryFiles, {
+        nodir: true,
+        base: "./src/images",
+    })
+	.pipe(gulpNewer(thumbPath))
+	.pipe(imageResize({
+	    width: 250,
+	    height: 200,
+	    crop: true,
+	    upscale: true,
+	    cover: true,
+            gravity: 'center'
+	}))
+	.pipe(gulp.dest(thumbPath))
+});
+
+gulp.task('images', ['images:optimize', 'images:thumbnails']);
+
 // Development server with browsersync
 function runServer() {
     browserSync.init({
@@ -77,6 +124,7 @@ function runServer() {
     gulp.watch("./src/js/**/*.js", ["js"]);
     gulp.watch("./src/css/**/*.css", ["css"]);
     gulp.watch("./src/fonts/**/*", ["fonts"]);
+    gulp.watch("./src/images/**/*", ["images"]);
     gulp.watch("./site/**/*", ["hugo"]);
 };
 

@@ -1,0 +1,31 @@
+{{ define "main" }}
+<section>
+    <div class="inner">
+        <div class="contained">
+	    <header class="major with-underline">
+	        <h1>{{ or .Params.header .Params.title }}</h1>
+	    </header>
+            <div>
+                {{ .Content }}
+            </div>
+        </div>
+	<div class="gallery">
+	    {{ range .Params.gallery }}
+            <a href="{{.image}}">
+	        <figure>
+	            <img src="{{.image | replaceRE "^/images/uploads" "/images/thumbnails/uploads" }}"
+                         alt="Gallery photo"/
+                         title="{{.description}}">
+                    <figcaption>{{.description}}</figcaption>
+	        </figure>
+            </a>
+	    {{ end }}
+	</div>
+    </div>
+</section>
+{{ end }}
+{{ define "scripts" }}
+{{- partial "scripts.html" . -}}
+{{- partial "photoswipe.html" . -}}
+<script></script>
+{{ end }}

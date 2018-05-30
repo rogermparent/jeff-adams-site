@@ -1,9 +1,15 @@
 ---
 title: Photos
-layout: single
+layout: gallery
+gallery:
+  - image: /images/uploads/dist-comm.jpg
+    description: >-
+      Jeff showing off our campaign sign.
+  - image: /images/uploads/convention-1.jpg
+    description: >-
+      Meeting Governor Paul Lepage.
+  - image: /images/uploads/convention-3.jpg
+    description: >-
+      Meeting Bruce Poliquin.
 ---
-![null](/images/uploads/dist-comm.jpg)
-
-![Meeting Gov. Lepage](/images/uploads/convention-1.jpg)
-
-![Bruce Poliquin](/images/uploads/convention-3.jpg)
+See all the photos we've taken on the campaign trail!
