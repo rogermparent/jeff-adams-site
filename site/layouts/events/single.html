@@ -1,0 +1,13 @@
+{{ define "main" }}
+<section class="contained">
+    <div class="inner">
+	<header class="major with-underline">
+	    <h1>{{ dateFormat "January 1" .Params.date }} - {{ or .Params.header .Params.title }}</h1>
+	</header>
+	{{ if .Params.image }}
+	<span class="image main"><img src="{{.Params.image}}" alt="" /></span>
+	{{ end }}
+	{{ .Content }}
+    </div>
+</section>
+{{ end }}

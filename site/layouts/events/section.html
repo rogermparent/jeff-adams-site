@@ -1,0 +1,34 @@
+{{ define "main" }}
+<section>
+    <div class="inner">
+        <div class="contained">
+	    <header class="major with-underline">
+	        <h1>{{ or .Params.header .Params.title }}</h1>
+	    </header>
+            <div>
+                {{ .Content }}
+            </div>
+        </div>
+        <div class="events">
+            {{ range .Paginator.Pages }}
+            <div>
+                <div class="headline">
+                    <time datetime="{{dateFormat "2006-01-02" .Params.date }}">
+                        {{ dateFormat "Monday, Jan 2" .Params.date }}
+                    </time>
+                    <a href="{{.URL}}">
+                        {{ .Title }}
+                    </a>
+                </div>
+                <div>
+                    {{ or .Params.excerpt .Summary }}
+                </div>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</section>
+{{ end }}
+{{ define "scripts" }}
+{{- partial "scripts.html" . -}}
+{{ end }}
