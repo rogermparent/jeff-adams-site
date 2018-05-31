@@ -11,7 +11,8 @@ import cssNested from "postcss-nested";
 import BrowserSync from "browser-sync";
 import webpack from "webpack";
 import imageResize from "gulp-image-resize";
-import gulpNewer from "gulp-newer";
+import imagemin from "gulp-imagemin";
+import newer from "gulp-newer";
 import frontmatter from "gray-matter";
 import webpackConfig from "./webpack.conf";
 import fs from "fs";
@@ -79,7 +80,8 @@ gulp.task('fonts', () => (
 const imagePath = "./dist/images";
 gulp.task('images:optimize', () => (
     gulp.src("./src/images/**/*", {nodir: true })
-	.pipe(gulpNewer(imagePath))
+	.pipe(newer(imagePath))
+	.pipe(imagemin())
 	.pipe(gulp.dest(imagePath))
 ));
 
@@ -100,7 +102,7 @@ gulp.task('images:thumbnails', () => {
         nodir: true,
         base: "./src/images",
     })
-	.pipe(gulpNewer(thumbPath))
+	.pipe(newer(thumbPath))
 	.pipe(imageResize({
 	    width: 250,
 	    height: 200,
@@ -109,6 +111,7 @@ gulp.task('images:thumbnails', () => {
 	    cover: true,
             gravity: 'center'
 	}))
+	.pipe(imagemin())
 	.pipe(gulp.dest(thumbPath))
 });
 
