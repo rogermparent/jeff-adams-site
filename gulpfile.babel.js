@@ -11,7 +11,10 @@ import cssNested from "postcss-nested";
 import BrowserSync from "browser-sync";
 import webpack from "webpack";
 import imageResize from "gulp-image-resize";
-import gulpNewer from "gulp-newer";
+import imagemin from "gulp-imagemin";
+import cleancss from "gulp-clean-css";
+import htmlmin from "gulp-htmlmin";
+import newer from "gulp-newer";
 import frontmatter from "gray-matter";
 import webpackConfig from "./webpack.conf";
 import fs from "fs";
@@ -33,7 +36,13 @@ gulp.task("server", ["hugo", "assets"], (cb) => runServer(cb));
 gulp.task("server-preview", ["hugo-preview", "assets"], (cb) => runServer(cb));
 
 // Build/production tasks
-gulp.task("build", ["assets"], (cb) => buildSite(cb, [], "production"));
+gulp.task("htmlmin", ["hugo-production"], () => {
+    gulp.src("./dist/*.html")
+	.pipe(htmlmin({collapseWhitespace: true}))
+	.pipe(gulp.dest('./dist'));
+});
+gulp.task("build", ["htmlmin"]);
+gulp.task("hugo-production", ["assets"], (cb) => buildSite(cb, [], "production"));
 gulp.task("build-preview", ["assets"], (cb) => buildSite(cb, hugoArgsPreview, "production"));
 
 // Compile CSS with PostCSS
@@ -46,6 +55,7 @@ gulp.task("css", () => (
             cssnext(),
             require('postcss-simple-vars'),
         ]))
+	.pipe(cleancss())
         .pipe(gulp.dest("./dist/css"))
         .pipe(browserSync.stream())
 ));
@@ -79,7 +89,8 @@ gulp.task('fonts', () => (
 const imagePath = "./dist/images";
 gulp.task('images:optimize', () => (
     gulp.src("./src/images/**/*", {nodir: true })
-	.pipe(gulpNewer(imagePath))
+	.pipe(newer(imagePath))
+	.pipe(imagemin())
 	.pipe(gulp.dest(imagePath))
 ));
 
@@ -94,13 +105,11 @@ gulp.task('images:thumbnails', () => {
         return('./src' + item.image);
     });
 
-    console.log(galleryFiles);
-
     gulp.src(galleryFiles, {
         nodir: true,
         base: "./src/images",
     })
-	.pipe(gulpNewer(thumbPath))
+	.pipe(newer(thumbPath))
 	.pipe(imageResize({
 	    width: 250,
 	    height: 200,
@@ -109,6 +118,7 @@ gulp.task('images:thumbnails', () => {
 	    cover: true,
             gravity: 'center'
 	}))
+	.pipe(imagemin())
 	.pipe(gulp.dest(thumbPath))
 });
 
