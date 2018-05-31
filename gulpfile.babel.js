@@ -12,6 +12,8 @@ import BrowserSync from "browser-sync";
 import webpack from "webpack";
 import imageResize from "gulp-image-resize";
 import imagemin from "gulp-imagemin";
+import cleancss from "gulp-clean-css";
+import htmlmin from "gulp-htmlmin";
 import newer from "gulp-newer";
 import frontmatter from "gray-matter";
 import webpackConfig from "./webpack.conf";
@@ -34,7 +36,13 @@ gulp.task("server", ["hugo", "assets"], (cb) => runServer(cb));
 gulp.task("server-preview", ["hugo-preview", "assets"], (cb) => runServer(cb));
 
 // Build/production tasks
-gulp.task("build", ["assets"], (cb) => buildSite(cb, [], "production"));
+gulp.task("htmlmin", ["hugo-production"], () => {
+    gulp.src("./dist/*.html")
+	.pipe(htmlmin({collapseWhitespace: true}))
+	.pipe(gulp.dest('./dist'));
+});
+gulp.task("build", ["htmlmin"]);
+gulp.task("hugo-production", ["assets"], (cb) => buildSite(cb, [], "production"));
 gulp.task("build-preview", ["assets"], (cb) => buildSite(cb, hugoArgsPreview, "production"));
 
 // Compile CSS with PostCSS
@@ -47,6 +55,7 @@ gulp.task("css", () => (
             cssnext(),
             require('postcss-simple-vars'),
         ]))
+	.pipe(cleancss())
         .pipe(gulp.dest("./dist/css"))
         .pipe(browserSync.stream())
 ));
@@ -95,8 +104,6 @@ gulp.task('images:thumbnails', () => {
     ).data.gallery.map((item) => {
         return('./src' + item.image);
     });
-
-    console.log(galleryFiles);
 
     gulp.src(galleryFiles, {
         nodir: true,
