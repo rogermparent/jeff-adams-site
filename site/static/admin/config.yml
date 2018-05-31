@@ -22,6 +22,9 @@ collections:
               The text shown on the browser tab and the top of the window.
             name: title
             widget: string
+          - label: Logo text
+            name: logo
+            widget: markdown
           - label: Navigation menu
             description: >-
               The list of links shown at the top of the site.
@@ -85,6 +88,7 @@ collections:
               - label: Content
                 name: content
                 widget: text
+      
       - label: "Gallery"
         name: "gallery"
         file: "site/content/photos.md"
