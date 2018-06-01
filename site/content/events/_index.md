@@ -1,4 +1,3 @@
 ---
-title: Events
+title: Upcoming Events
 ---
-Keep up on all the events related to Jeff's campaign!

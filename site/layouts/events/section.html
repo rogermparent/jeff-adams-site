@@ -17,17 +17,26 @@
 	    <div class="events post-list">
 		{{ range ($.Scratch.Get "futureEvents") }}
 		<div>
-		    <div class="headline">
-			<a href="{{.URL}}">
-			    {{ .Title }}
-			</a>
-			<time datetime="{{dateFormat "2006-01-02" .Params.start }}">
-			    {{ dateFormat "Monday, Jan 2" .Params.start }}
-			</time>
-		    </div>
-		    {{ if isset .Params "excerpt" }}
+                    <a href="{{.URL}}">
+                        <div class="info">
+		            <h2 class="title">
+			        {{ .Title }}
+		            </h2>
+                            {{ if .Params.start }}
+		            <time datetime="{{dateFormat "2006-01-02" .Params.start }}">
+			        {{ dateFormat "Monday, Jan 2" .Params.start }}{{ with .Params.duration }}, 
+                                {{ . }}
+                                {{ end }}
+		            </time>
+                            {{ end }}
+                            {{ if .Params.location }}
+                            <div class="location">{{.Params.location}}</div>
+                            {{ end }}
+		            {{ if isset .Params "excerpt" }}
+                        </div>
+                    </a>
 		    <div class="summary">
-			{{ markdownify .Params.excerpt }}
+			{{ .Params.excerpt }}
 		    </div>
 		    {{ end }}
 		</div>
