@@ -1,23 +1,29 @@
-import gulp from "gulp";
+// stdlib
 import {spawn} from "child_process";
+import fs from "fs";
+// build tools
+import gulp from "gulp";
+import webpack from "webpack";
 import hugoBin from "hugo-bin";
+// gulp plugins
 import gutil from "gulp-util";
 import flatten from "gulp-flatten";
 import postcss from "gulp-postcss";
-import cssImport from "postcss-import";
-import cssnext from "postcss-cssnext";
-import cssExtend from "postcss-extend";
-import cssNested from "postcss-nested";
 import BrowserSync from "browser-sync";
-import webpack from "webpack";
 import imageResize from "gulp-image-resize";
 import imagemin from "gulp-imagemin";
 import cleancss from "gulp-clean-css";
 import htmlmin from "gulp-htmlmin";
 import newer from "gulp-newer";
+// postcss plugins
+import cssImport from "postcss-import";
+import cssnext from "postcss-cssnext";
+import cssExtend from "postcss-extend";
+import cssNested from "postcss-nested";
+// other
 import frontmatter from "gray-matter";
+// local files
 import webpackConfig from "./webpack.conf";
-import fs from "fs";
 
 const browserSync = BrowserSync.create();
 

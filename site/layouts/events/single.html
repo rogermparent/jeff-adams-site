@@ -2,7 +2,11 @@
 <section class="contained">
     <div class="inner">
 	<header class="major with-underline">
-	    <h1>{{ dateFormat "January 1" .Params.date }} - {{ or .Params.header .Params.title }}</h1>
+	  <h1>{{ or .Params.header .Params.title }}</h1>
+	  <time>
+	    {{ dateFormat "January 1" .Params.start }}{{ if .Params.duration }}, {{ .Params.duration }}
+	    {{ end }}
+	  </time>
 	</header>
 	{{ if .Params.image }}
 	<span class="image main"><img src="{{.Params.image}}" alt="" /></span>

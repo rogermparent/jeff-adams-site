@@ -1,31 +1,44 @@
 {{ define "main" }}
+{{ range .CurrentSection.Pages.ByParam "start" }}
+{{ if now.Before (time .Params.start) }}
+{{ $.Scratch.Add "futureEvents" (slice .) }}
+{{ end }}
+{{ end }}
 <section>
     <div class="inner">
-        <div class="contained">
+	<div class="contained">
 	    <header class="major with-underline">
-	        <h1>{{ or .Params.header .Params.title }}</h1>
+		<h1>{{ or .Params.header .Params.title }}</h1>
 	    </header>
-            <div>
-                {{ .Content }}
-            </div>
-        </div>
-        <div class="events">
-            {{ range .Paginator.Pages }}
-            <div>
-                <div class="headline">
-                    <time datetime="{{dateFormat "2006-01-02" .Params.date }}">
-                        {{ dateFormat "Monday, Jan 2" .Params.date }}
-                    </time>
-                    <a href="{{.URL}}">
-                        {{ .Title }}
-                    </a>
-                </div>
-                <div>
-                    {{ or .Params.excerpt .Summary }}
-                </div>
-            </div>
-            {{ end }}
-        </div>
+	    <div>
+		{{ .Content }}
+	    </div>
+	    {{ template "_internal/pagination.html" }}
+	    <div class="events post-list">
+		{{ range ($.Scratch.Get "futureEvents") }}
+		<div>
+		    <div class="headline">
+			<a href="{{.URL}}">
+			    {{ .Title }}
+			</a>
+			<time datetime="{{dateFormat "2006-01-02" .Params.start }}">
+			    {{ dateFormat "Monday, Jan 2" .Params.start }}
+			</time>
+		    </div>
+		    {{ if isset .Params "excerpt" }}
+		    <div class="summary">
+			{{ markdownify .Params.excerpt }}
+		    </div>
+		    {{ end }}
+		</div>
+		{{ else }}
+		<div class="no-items">
+		    <p>There aren't any upcoming events right now.</p>
+		    <p>This page will keep updating, so check back later!</p>
+		</div>
+		{{ end }}
+	    </div>
+	</div>
     </div>
 </section>
 {{ end }}
