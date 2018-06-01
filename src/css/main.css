@@ -232,15 +232,22 @@ a.button {
 header {
     &.with-underline {
         h1, h2, h3, h4, h5, h6 {
-            padding: 0.1rem 0.1rem 0.5rem 0.1rem;
-            margin: 0.5rem 0;
+            padding: 0;
+            margin: 0;
             display: inline-block;
-            border-bottom: 2px solid white;
         }
         p {
             margin: 0.25em;
         }
+        border-bottom: 2px solid white;
     }
+    time {
+	font-size: 1.1em;
+	margin-top: 0.2em;
+	display: block;
+    }
+    padding-bottom: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 .underlined {
@@ -293,4 +300,28 @@ footer {
 
 img {
     max-width: 100%;
+}
+
+.post-list {
+    >div {
+	border-collapse: collapse;
+	border: 1px solid $gray;
+	border-style: none none solid none;
+	padding: 1em 0.2em;
+	&:first-child {
+	    border-style: solid none;
+	}
+    }
+    .headline {
+	font-weight: 600;
+	a, time {
+	    display: block;
+	}
+	a {
+	    font-size: 1.5em;
+	}
+    }
+    time {
+	color: $gray;
+    }
 }
