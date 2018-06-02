@@ -127,12 +127,15 @@ collections:
       - label: Location
         name: location
         widget: string
+        required: false
       - label: Time
         name: duration
         widget: string
+        required: false
       - label: Excerpt
         name: excerpt
         widget: text
+        required: false
       - label: Body
         name: body
         widget: markdown

@@ -2,6 +2,7 @@
 title: Meet the Candidates
 start: 2018-05-30
 duration: 4:00PM - 6:00PM
+location: Lebanon Elementary school
 ---
 Come on out on May 30th to meet Jeff in Person!
 
