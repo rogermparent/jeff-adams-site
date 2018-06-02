@@ -8,7 +8,7 @@
     <div class="inner">
 	<div class="contained">
 	    <header class="major with-underline">
-		<h1>{{ or .Params.header .Params.title }}</h1>
+		<h1>{{ .Site.Data.events_page.header }}</h1>
 	    </header>
 	    <div>
 		{{ .Content }}
@@ -16,15 +16,15 @@
 	    {{ template "_internal/pagination.html" }}
 	    <div class="events post-list">
 		{{ range ($.Scratch.Get "futureEvents") }}
-		<div>
+		<div class="post-item">
                     <a href="{{.URL}}">
+		        <h2 class="title">
+			    {{ .Title }}
+		        </h2>
                         <div class="info">
-		            <h2 class="title">
-			        {{ .Title }}
-		            </h2>
                             {{ if .Params.start }}
 		            <time datetime="{{dateFormat "2006-01-02" .Params.start }}">
-			        {{ dateFormat "Monday, Jan 2" .Params.start }}{{ with .Params.duration }}, 
+			        {{ dateFormat "Mon. Jan 2" .Params.start }}{{ with .Params.duration }},
                                 {{ . }}
                                 {{ end }}
 		            </time>
@@ -32,9 +32,9 @@
                             {{ if .Params.location }}
                             <div class="location">{{.Params.location}}</div>
                             {{ end }}
-		            {{ if isset .Params "excerpt" }}
                         </div>
                     </a>
+		    {{ if isset .Params "excerpt" }}
 		    <div class="summary">
 			{{ .Params.excerpt }}
 		    </div>

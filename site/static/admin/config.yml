@@ -38,7 +38,7 @@ collections:
               - label: URL
                 name: url
                 widget: string
-  
+
   - name: pages
     label: Pages
     label_singular: Page
@@ -113,3 +113,26 @@ collections:
           - label: Body
             name: body
             widget: markdown
+
+  - name: events
+    label: Events
+    folder: "site/content/events"
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Start date
+        name: start
+        widget: date
+      - label: Location
+        name: location
+        widget: string
+      - label: Time
+        name: duration
+        widget: string
+      - label: Excerpt
+        name: excerpt
+        widget: text
+      - label: Body
+        name: body
+        widget: markdown
