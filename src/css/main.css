@@ -269,7 +269,7 @@ nav {
 	display: flex;
 	flex-flow: row wrap;
 	align-items: center;
-	justify-content: right;
+	justify-content: flex-end;
 
 	a {
 	    padding: 0.5em;
