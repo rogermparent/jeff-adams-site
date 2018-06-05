@@ -25,6 +25,11 @@ collections:
           - label: Logo text
             name: logo
             widget: markdown
+          - label: Description
+            name: description
+            description: >-
+              The website description used by search engines.
+            widget: text
           - label: Navigation menu
             description: >-
               The list of links shown at the top of the site.

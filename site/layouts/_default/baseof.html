@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ block "title" . }}{{ with .Title }}{{ . }} - {{ end }}{{ .Site.Data.site.title }}{{ end }}</title>
 
-        {{ with .Description }}
+        {{ with .Site.Data.site.description }}
         <meta name="description" content="{{ . }}">
         {{ end }}
         {{- if eq (getenv "HUGO_ENV") "production" | or (eq .Site.Params.env "production") -}}
