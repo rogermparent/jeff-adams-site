@@ -51,13 +51,13 @@ body {
         text-align: center;
         font-weight: 600;
 
-	@media screen and (min-width: $bp-med) {
-	    padding: 0.5em 1.5em;
-	    display: flex;
-	    flex-flow: row nowrap;
-	    nav {
-	    }
-	}
+	      @media screen and (min-width: $bp-med) {
+	          padding: 0.5em 1.5em;
+	          display: flex;
+	          flex-flow: row nowrap;
+	          nav {
+	          }
+	      }
     }
 
     &>footer {
@@ -178,19 +178,19 @@ a.button {
     }
 
     &::after {
-	$arrow-size: 4px;
-	content: " ";
-	border: solid white;
-	border-width: 0 3px 3px 0;
-	transform: rotate(-45deg);
-	padding: 3px;
-	margin: 1px 1px 1px 4px;
-	display: inline-block;
-	transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+	      $arrow-size: 4px;
+	      content: " ";
+	      border: solid white;
+	      border-width: 0 3px 3px 0;
+	      transform: rotate(-45deg);
+	      padding: 3px;
+	      margin: 1px 1px 1px 4px;
+	      display: inline-block;
+	      transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
     }
 
     &:hover::after {
-	border-color: $link-hover;
+	      border-color: $link-hover;
     }
 }
 
@@ -200,28 +200,28 @@ a.button {
     margin: auto;
     padding: 0;
     header {
-	margin-bottom: 1em;
-	padding: 0.5em;
+	      margin-bottom: 1em;
+	      padding: 0.5em;
     }
     .inner {
-	max-width: 700px;
+	      max-width: 700px;
     }
     @media screen and (min-width: $bp-med) {
-	max-width: 800px;
-	padding: 0 1em;
+	      max-width: 800px;
+	      padding: 0 1em;
         header {
             flex: 1;
         }
-	.inner {
+	      .inner {
             display: flex;
             flex-flow: row nowrap;
             width: 100%;
-	    justify-content: center;
-	    align-items: center;
+	          justify-content: center;
+	          align-items: center;
             .content {
-		margin: 0 0.5em;
+		            margin: 0 0.5em;
             }
-	}
+	      }
     }
 }
 
@@ -242,9 +242,9 @@ header {
         border-bottom: 2px solid white;
     }
     time {
-	font-size: 1.1em;
-	margin-top: 0.2em;
-	display: block;
+	      font-size: 1.1em;
+	      margin-top: 0.2em;
+	      display: block;
     }
     padding-bottom: 0.5em;
     margin-bottom: 0.5em;
@@ -259,36 +259,40 @@ nav {
     padding-top: 0.25em;
     font-size: 1em;
     a {
-	display: inline-block;
-	padding: 0.25em;
+	      display: inline-block;
+	      padding: 0.25em;
     }
     @media (min-width: $bp-med) {
-	padding: 0;
-	font-size: 1.2em;
-	float: right;
-	flex: 1;
-	display: flex;
-	flex-flow: row wrap;
-	align-items: center;
-	justify-content: flex-end;
+	      padding: 0;
+	      font-size: 1.2em;
+	      float: right;
+	      flex: 1;
+	      display: flex;
+	      flex-flow: row wrap;
+	      align-items: center;
+	      justify-content: flex-end;
 
-	a {
-	    padding: 0.5em;
-	}
+	      a {
+	          padding: 0.5em;
+	      }
     }
 }
 
 footer {
     >div {
-	padding: 0.25em 0.5em;
-	background-color: $main-bg-color;
+	      padding: 0.25em 0.5em;
+	      background-color: $main-bg-color;
     }
 
     .controls {
-	>* {
-	    margin: 0 0.25em;
-	}
+	      >* {
+	          margin: 0 0.25em;
+	      }
     }
+}
+
+.credit {
+    font-size: 0.8em;
 }
 
 .image.main {
@@ -311,22 +315,20 @@ img {
         margin: 0 0 0.25em 0;
     }
     >div {
-	border-collapse: collapse;
-	border-top: 1px solid $gray;
-	padding: 1em 0.2em;
-	&:first-child {
-	    border: none;
-	}
+	      border-collapse: collapse;
+	      border-top: 1px solid $gray;
+	      padding: 1em 0.2em;
+	      &:first-child {
+	          border: none;
+	      }
     }
     .info {
-	font-weight: 600;
+	      font-weight: 600;
         font-size: 1em;
         margin: 0.25em 0;
     }
     .summary {
         font-size: 0.9em;
-    }
-    time {
     }
 
     @media screen and (min-width: $bp-med) {
